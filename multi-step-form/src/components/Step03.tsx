@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Step03Props {
-  readonly selectedPrestation: string
+  readonly prestationType: string
   readonly onNext: () => void
   readonly onBack: () => void
 }
 
 /* Plans DeepCleaning par type de prestation - https://deepcleaning.fr/booking/ */
-type PlanItem = { id: string; title: string; price: number; duration: string }
-
-const PLANS_BY_PRESTATION: Record<string, PlanItem[]> = {
+const PLANS_BY_PRESTATION: Record<string, Array<{ id: string; title: string; price: number; duration: string }>> = {
   canape: [
     { id: 'canape-2-3', title: 'Canapé 2-3 places', price: 79, duration: '30 min' },
     { id: 'canape-4-5', title: 'Canapé 4/5 places', price: 89, duration: '45 min' },
@@ -22,7 +20,7 @@ const PLANS_BY_PRESTATION: Record<string, PlanItem[]> = {
     { id: 'matelas-kingsize', title: 'King size', price: 89, duration: '30 min' },
   ],
   tapis: [
-    { id: 'tapis-236', title: 'Tapis, Moquette 2.3×1.6m', price: 49, duration: '15 min' },
+    { id: 'tapis-23x16', title: 'Tapis, Moquette 2.3×1.6m', price: 49, duration: '15 min' },
   ],
   fauteuil: [
     { id: 'fauteuil-1', title: 'Fauteuil', price: 39, duration: '15 min' },
@@ -32,14 +30,14 @@ const PLANS_BY_PRESTATION: Record<string, PlanItem[]> = {
   ],
 }
 
-function Step03({ selectedPrestation, onNext, onBack }: Step03Props) {
-  const plans = PLANS_BY_PRESTATION[selectedPrestation] ?? PLANS_BY_PRESTATION.canape
+function Step03({ prestationType, onNext, onBack }: Step03Props) {
+  const plans = PLANS_BY_PRESTATION[prestationType] ?? PLANS_BY_PRESTATION.canape
   const [selected, setSelected] = useState<string>(plans[0]?.id ?? '')
 
   useEffect(() => {
-    const newPlans = PLANS_BY_PRESTATION[selectedPrestation] ?? PLANS_BY_PRESTATION.canape
-    setSelected(newPlans[0]?.id ?? '')
-  }, [selectedPrestation])
+    const firstPlanId = (PLANS_BY_PRESTATION[prestationType] ?? PLANS_BY_PRESTATION.canape)[0]?.id ?? ''
+    setSelected(firstPlanId)
+  }, [prestationType])
 
   return (
     <div className="form-step-card form-step-v2">
@@ -100,14 +98,14 @@ function Step03({ selectedPrestation, onNext, onBack }: Step03Props) {
                 </div>
                 <div className="plan-card-content">
                   <span className="plan-card-title">{plan.title}</span>
-                  <div className="badges-row" style={{ marginTop: 8, gap: 12 }}>
+                  <div className="badges-row" style={{ marginTop: 16 }}>
                     <span className={`mini-tag ${selected === plan.id ? 'selected' : ''}`}>
                       <strong>{plan.price}€</strong>
                     </span>
                     <span className={`mini-tag ${selected === plan.id ? 'selected' : ''}`}>
                       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ flexShrink: 0 }}>
                         <circle cx="8" cy="8" r="6" />
-                        <path d="M8 4v4l3 2" strokeLinecap="round" />
+                        <path d="M8 4v4l2 2" strokeLinecap="round" />
                       </svg>
                       {plan.duration}
                     </span>

@@ -48,7 +48,7 @@ function Step05({ onNext, onBack }: Step05Props) {
       </div>
 
       <div className="plan-step-footer">
-        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 5 sur 5</span>
+        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 6 sur 6</span>
         <div style={{ display: 'flex', gap: 24 }}>
           <button className="btn btn-secondary" onClick={onBack}>Retour</button>
           <button className="btn btn-primary" onClick={onNext}>Activer le compte</button>

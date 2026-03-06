@@ -26,7 +26,7 @@ function Step01({ onNext, onBack }: Step01Props) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 32, width: '100%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <h2 className="form-step-title" style={{ marginBottom: 0 }}>Informations personnelles</h2>
-          <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 3/5</span>
+          <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 4/6</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
           {/* Row 1: Name + Email */}
@@ -104,7 +104,7 @@ function Step01({ onNext, onBack }: Step01Props) {
       </div>
 
       <div className="plan-step-footer">
-        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 3 sur 5</span>
+        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 4 sur 6</span>
         <div style={{ display: 'flex', gap: 24 }}>
           <button className="btn btn-secondary" onClick={onBack}>Retour</button>
           <button className="btn btn-primary" onClick={onNext}>Suivant</button>

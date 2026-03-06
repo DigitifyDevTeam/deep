@@ -2,24 +2,26 @@ import { useState } from 'react'
 import './App.css'
 import Step01 from './components/Step01'
 import Step02 from './components/Step02'
-import Step03 from './components/Step03'
+import Step02Prestation from './components/Step02Prestation'
+import Step03DateHeure from './components/Step03DateHeure'
 import Step04 from './components/Step04'
 import Step05 from './components/Step05'
 
 const STEPS = [
-  { id: 1, title: 'Type de prestation', description: 'Choisissez votre type de prestation.' },
-  { id: 2, title: 'Plan', description: 'Choisissez le plan qui correspond à vos besoins.' },
-  { id: 3, title: 'Informations personnelles', description: 'Présentez-vous pour commencer.' },
-  { id: 4, title: 'Vérification d\'identité', description: 'Vérifiez votre identité pour des raisons de sécurité.' },
-  { id: 5, title: 'Activer le compte', description: 'Dernière étape ! Activons votre compte.' },
+  { id: 1, title: 'Prestation & Plan', description: 'Choisissez votre type de prestation et votre plan.' },
+  { id: 2, title: 'Prestations supplémentaires', description: 'Des prestations supplémentaires ?' },
+  { id: 3, title: 'Date et Heure', description: 'Sélectionnez le créneau qui vous convient.' },
+  { id: 4, title: 'Informations personnelles', description: 'Présentez-vous pour commencer.' },
+  { id: 5, title: 'Vérification d\'identité', description: 'Vérifiez votre identité pour des raisons de sécurité.' },
+  { id: 6, title: 'Activer le compte', description: 'Dernière étape ! Activons votre compte.' },
 ]
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [selectedPrestation, setSelectedPrestation] = useState<string>('canape')
+  const [prestationType, setPrestationType] = useState<string>('')
 
   const handleNext = () => {
-    if (currentStep < 5) setCurrentStep(currentStep + 1)
+    if (currentStep < 6) setCurrentStep(currentStep + 1)
   }
 
   const handleBack = () => {
@@ -31,7 +33,7 @@ function App() {
       {/* Tag Container */}
       <div className="tag-container">
         <div className="tab-pill">
-          <span>Formulaire multi-étapes V1</span>
+          <span>Deep Cleaning</span>
         </div>
       </div>
 
@@ -39,17 +41,10 @@ function App() {
       <div className="form-main-container">
         <div className="form-card">
           <div className="form-inner">
-            {/* Side Bar - brix templates style */}
             <aside className="sidebar sidebar-brix">
               <div className="sidebar-top">
                 <div className="sidebar-logo-brix">
-                  <div className="sidebar-logo-dots">
-                    <span /><span /><span /><span />
-                  </div>
-                  <span className="sidebar-logo-text-brix">
-                    <strong>brix</strong>{' '}
-                    <span className="sidebar-logo-templates">templates</span>
-                  </span>
+                  <img src="/logo_4.png" alt="Logo" className="sidebar-logo-img" />
                 </div>
                 <div className="sidebar-divider" />
                 <div className="sidebar-steps-vertical">
@@ -90,27 +85,21 @@ function App() {
             {/* Right Column - Form Content */}
             <main className="form-content">
               {currentStep === 1 && (
-                <Step02
-                  selectedPrestation={selectedPrestation}
-                  onSelectPrestation={setSelectedPrestation}
-                  onNext={handleNext}
-                  onBack={handleBack}
-                />
+                <Step02 prestationType={prestationType} onPrestationChange={setPrestationType} onNext={handleNext} onBack={handleBack} />
               )}
               {currentStep === 2 && (
-                <Step03
-                  selectedPrestation={selectedPrestation}
-                  onNext={handleNext}
-                  onBack={handleBack}
-                />
+                <Step02Prestation onNext={handleNext} onBack={handleBack} />
               )}
               {currentStep === 3 && (
-                <Step01 onNext={handleNext} onBack={handleBack} />
+                <Step03DateHeure onNext={handleNext} onBack={handleBack} />
               )}
               {currentStep === 4 && (
-                <Step04 onNext={handleNext} onBack={handleBack} />
+                <Step01 onNext={handleNext} onBack={handleBack} />
               )}
               {currentStep === 5 && (
+                <Step04 onNext={handleNext} onBack={handleBack} />
+              )}
+              {currentStep === 6 && (
                 <Step05 onNext={handleNext} onBack={handleBack} />
               )}
             </main>

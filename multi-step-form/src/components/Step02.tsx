@@ -1,86 +1,60 @@
+import { useEffect, useState } from 'react'
+
 interface Step02Props {
-  readonly selectedPrestation: string
-  readonly onSelectPrestation: (id: string) => void
+  readonly prestationType: string
+  readonly onPrestationChange: (id: string) => void
   readonly onNext: () => void
   readonly onBack: () => void
 }
 
-/* Prestations DeepCleaning - choisissez votre type de prestation */
-const SERVICES = [
-  { id: 'canape', label: 'Canapé', icon: 'sofa' },
-  { id: 'matelas', label: 'Matelas', icon: 'bed' },
-  { id: 'tapis', label: 'Tapis, Moquette', icon: 'rug' },
-  { id: 'fauteuil', label: 'Fauteuil', icon: 'armchair' },
-  { id: 'chaises', label: 'Chaises', icon: 'chairs' },
-]
-
-const ServiceIcon = ({ name, selected }: { name: string; selected: boolean }) => {
-  const color = selected ? '#FFFFFF' : '#4A3AFF'
-  const size = 32
-  switch (name) {
-    case 'sofa':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M2 9a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9z" />
-          <path d="M4 15v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-          <path d="M6 12h.01M18 12h.01" />
-        </svg>
-      )
-    case 'bed':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M2 4v16" />
-          <path d="M2 8h18a2 2 0 0 1 2 2v10" />
-          <path d="M2 17h20" />
-          <path d="M6 8V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4" />
-        </svg>
-      )
-    case 'rug':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" />
-          <path d="M3 9h18" />
-          <path d="M3 15h18" />
-          <path d="M9 3v18" />
-          <path d="M15 3v18" />
-        </svg>
-      )
-    case 'armchair':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
-          <path d="M3 11v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2" />
-          <path d="M5 18v2" />
-          <path d="M19 18v2" />
-          <path d="M9 11v6" />
-          <path d="M15 11v6" />
-        </svg>
-      )
-    case 'chairs':
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M5 10V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v6" />
-          <path d="M5 10v10a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V10" />
-          <path d="M15 10v10a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V10" />
-          <path d="M5 10h14" />
-          <path d="M8 7h8" />
-        </svg>
-      )
-    default:
-      return null
-  }
+/* Plans DeepCleaning par type de prestation */
+const PLANS_BY_PRESTATION: Record<string, Array<{ id: string; title: string; price: number; duration: string }>> = {
+  canape: [
+    { id: 'canape-2-3', title: 'Canapé 2-3 places', price: 79, duration: '30 min' },
+    { id: 'canape-4-5', title: 'Canapé 4/5 places', price: 89, duration: '45 min' },
+    { id: 'canape-6', title: 'Canapé 6 places', price: 109, duration: '50 min' },
+    { id: 'canape-8', title: 'Canapé 8 places', price: 159, duration: '50 min' },
+  ],
+  matelas: [
+    { id: 'matelas-1', title: 'Matelas 1 place (recto/verso)', price: 69, duration: '20 min' },
+    { id: 'matelas-2', title: 'Matelas 2 place (recto/verso)', price: 79, duration: '30 min' },
+    { id: 'matelas-kingsize', title: 'King size', price: 89, duration: '30 min' },
+  ],
+  tapis: [
+    { id: 'tapis-23x16', title: 'Tapis, Moquette 2.3×1.6m', price: 49, duration: '15 min' },
+  ],
+  fauteuil: [
+    { id: 'fauteuil-1', title: 'Fauteuil', price: 39, duration: '15 min' },
+  ],
+  chaises: [
+    { id: 'chaises-4', title: 'Lots de 4 Chaises', price: 66, duration: '30 min' },
+  ],
 }
 
-function Step02({ selectedPrestation, onSelectPrestation, onNext, onBack }: Step02Props) {
+import { PrestationTypeSelector } from './PrestationTypeSelector'
+
+function Step02({ prestationType, onPrestationChange, onNext, onBack }: Step02Props) {
+  const plans = prestationType ? (PLANS_BY_PRESTATION[prestationType] ?? PLANS_BY_PRESTATION.canape) : []
+  const [selectedPlan, setSelectedPlan] = useState<string>('')
+
+  useEffect(() => {
+    if (prestationType) {
+      const firstPlanId = (PLANS_BY_PRESTATION[prestationType] ?? PLANS_BY_PRESTATION.canape)[0]?.id ?? ''
+      setSelectedPlan(firstPlanId)
+    } else {
+      setSelectedPlan('')
+    }
+  }, [prestationType])
+
+  const canContinue = Boolean(prestationType && selectedPlan)
 
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        {/* Stepper - 3 steps as in image */}
         <div className="stepper-horizontal stepper-compact">
           <div className="stepper-step">
             <div className="stepper-dot active">1</div>
-            <span className="stepper-title active">Type de prestation</span>
+            <span className="stepper-title active">Prestation & Plan</span>
           </div>
           <div className="stepper-chevron">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -89,7 +63,7 @@ function Step02({ selectedPrestation, onSelectPrestation, onNext, onBack }: Step
           </div>
           <div className="stepper-step">
             <div className="stepper-dot pending">2</div>
-            <span className="stepper-title pending">Plan</span>
+            <span className="stepper-title pending">Prestations supplémentaires</span>
           </div>
           <div className="stepper-chevron">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -98,50 +72,95 @@ function Step02({ selectedPrestation, onSelectPrestation, onNext, onBack }: Step
           </div>
           <div className="stepper-step">
             <div className="stepper-dot pending">3</div>
+            <span className="stepper-title pending">Date et Heure</span>
+          </div>
+          <div className="stepper-chevron">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="stepper-step">
+            <div className="stepper-dot pending">4</div>
             <span className="stepper-title pending">Infos personnelles</span>
+          </div>
+          <div className="stepper-chevron">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="stepper-step">
+            <div className="stepper-dot pending">5</div>
+            <span className="stepper-title pending">Identité</span>
+          </div>
+          <div className="stepper-chevron">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="stepper-step">
+            <div className="stepper-dot pending">6</div>
+            <span className="stepper-title pending">Activer</span>
           </div>
         </div>
 
         <div style={{ borderTop: '1px solid var(--color-border)', width: '100%' }} />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, paddingTop: 32 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <h2 className="form-step-title" style={{ marginBottom: 0 }}>Choisissez votre type de prestation</h2>
-            <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 1/5</span>
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+          {/* Section 1: Type de prestation */}
+          <PrestationTypeSelector
+            prestationType={prestationType}
+            onPrestationChange={onPrestationChange}
+            stepLabel="Étape 1/6"
+          />
 
-          <div className="services-grid">
-            {SERVICES.map((service) => (
-              <button
-                key={service.id}
-                type="button"
-                className={`service-card ${selectedPrestation === service.id ? 'selected' : ''}`}
-                onClick={() => onSelectPrestation(service.id)}
-              >
-                <div className="service-card-radio">
-                  <span className="radio-dot" />
+          {/* Section 2: Choisissez votre plan - appears only after prestation type is selected */}
+          {prestationType && (
+            <div key={prestationType} className="prestation-plan-section" style={{ animation: 'fadeSlideIn 0.35s ease-out 0.2s both' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <h3 className="form-step-subtitle" style={{ marginBottom: 0 }}>Choisissez votre plan</h3>
+                <p style={{ fontSize: 14, color: 'var(--color-text-muted)', lineHeight: 1.5, marginTop: -8 }}>
+                  Sélectionnez le plan qui correspond à votre prestation.
+                </p>
+                <div className="plan-cards-grid">
+                  {plans.map((plan) => (
+                    <button
+                      key={plan.id}
+                      type="button"
+                      className={`plan-card ${selectedPlan === plan.id ? 'selected' : ''}`}
+                      onClick={() => setSelectedPlan(plan.id)}
+                    >
+                      <div className="plan-card-radio">
+                        <span className="radio-dot" />
+                      </div>
+                      <div className="plan-card-content">
+                        <span className="plan-card-title">{plan.title}</span>
+                        <div className="badges-row" style={{ marginTop: 16 }}>
+                          <span className={`mini-tag ${selectedPlan === plan.id ? 'selected' : ''}`}>
+                            <strong>{plan.price}€</strong>
+                          </span>
+                          <span className={`mini-tag ${selectedPlan === plan.id ? 'selected' : ''}`}>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ flexShrink: 0 }}>
+                              <circle cx="8" cy="8" r="6" />
+                              <path d="M8 4v4l2 2" strokeLinecap="round" />
+                            </svg>
+                            {plan.duration}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
                 </div>
-                <div className={`service-card-icon-wrapper ${selectedPrestation === service.id ? 'selected' : ''}`}>
-                  <ServiceIcon name={service.icon} selected={selectedPrestation === service.id} />
-                </div>
-                <span className={`service-card-label ${selectedPrestation === service.id ? 'selected' : ''}`}>
-                  {service.label}
-                </span>
-              </button>
-            ))}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="plan-step-footer">
-        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 1 sur 5</span>
+        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 1 sur 6</span>
         <div style={{ display: 'flex', gap: 24 }}>
-          <button className="btn btn-secondary" onClick={onBack}>
-            Retour
-          </button>
-          <button className="btn btn-primary" onClick={onNext}>
-            Continuer
-          </button>
+          <button className="btn btn-secondary" onClick={onBack}>Retour</button>
+          <button className="btn btn-primary" onClick={onNext} disabled={!canContinue}>Continuer</button>
         </div>
       </div>
     </div>

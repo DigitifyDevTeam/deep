@@ -22,26 +22,31 @@ function Step04({ onNext, onBack }: Step04Props) {
                 <path d="M4 7L6 9L10 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
-            <span className="stepper-title">Type de prestation</span>
+            <span className="stepper-title">Prestation & Plan</span>
           </div>
           <div style={{ flex: 1, height: 4, background: 'var(--color-primary-light)', borderRadius: 2, alignSelf: 'center', maxWidth: 60 }} />
           <div className="stepper-step">
             <div className="stepper-dot completed">2</div>
-            <span className="stepper-title">Plan</span>
+            <span className="stepper-title">Prestations supplémentaires</span>
           </div>
           <div style={{ flex: 1, height: 4, background: 'var(--color-primary-light)', borderRadius: 2, alignSelf: 'center', maxWidth: 60 }} />
           <div className="stepper-step">
             <div className="stepper-dot completed">3</div>
+            <span className="stepper-title">Date et Heure</span>
+          </div>
+          <div style={{ flex: 1, height: 4, background: 'var(--color-primary-light)', borderRadius: 2, alignSelf: 'center', maxWidth: 60 }} />
+          <div className="stepper-step">
+            <div className="stepper-dot completed">4</div>
             <span className="stepper-title">Infos personnelles</span>
           </div>
           <div style={{ flex: 1, height: 4, background: 'var(--color-primary-light)', borderRadius: 2, alignSelf: 'center', maxWidth: 60 }} />
           <div className="stepper-step">
-            <div className="stepper-dot active">4</div>
+            <div className="stepper-dot active">5</div>
             <span className="stepper-title active">Identité</span>
           </div>
           <div style={{ flex: 1, height: 3, background: 'var(--color-border-input)', borderRadius: 2, alignSelf: 'center', maxWidth: 60 }} />
           <div className="stepper-step">
-            <div className="stepper-dot pending">5</div>
+            <div className="stepper-dot pending">6</div>
             <span className="stepper-title pending">Activer</span>
           </div>
         </div>

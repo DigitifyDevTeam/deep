@@ -4,9 +4,9 @@
   --color-bg-white: #FFFFFF;
   --color-bg-fbfbfe: #FBFBFE;
   --color-bg-f9f8ff: #F9F8FF;
-  --color-primary: #4A3AFF;
-  --color-primary-light: #8C82FF;
-  --color-primary-border: #D2CEFF;
+  --color-primary: #416da8;
+  --color-primary-light: #6B9AD4;
+  --color-primary-border: #B8CCE8;
   --color-text-dark: #170F49;
   --color-text-muted: #6F6C8F;
   --color-text-light: #A0A3BD;
@@ -17,9 +17,9 @@
   --shadow-neutral-01: 0px 0.5px 1px rgba(25, 33, 61, 0.04);
   --shadow-neutral-02: 0px 1px 8px rgba(25, 33, 61, 0.06);
   --shadow-neutral-03: 0px 2px 15px rgba(25, 33, 61, 0.1);
-  --shadow-primary-04: 0px 5px 15px rgba(74, 58, 255, 0.06);
-  --shadow-primary-glow: 0px 2px 5px rgba(74, 58, 255, 0.25);
-  --gradient-primary: linear-gradient(160.41deg, #8C82FF -5.15%, #4A3AFF 87.35%);
+  --shadow-primary-04: 0px 5px 15px rgba(65, 109, 168, 0.06);
+  --shadow-primary-glow: 0px 2px 5px rgba(65, 109, 168, 0.25);
+  --gradient-primary: linear-gradient(160.41deg, #6B9AD4 -5.15%, #416da8 87.35%);
   --gradient-secondary: linear-gradient(151.44deg, #FFFFFF -62.65%, #FBFBFE 83.01%);
   --gradient-dark: linear-gradient(160.41deg, #514F6E -5.15%, #170F49 87.35%);
 }
