@@ -120,19 +120,10 @@ function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
                       setQuantity(service.id, 0)
                     }
                   }}
-                  style={{ cursor: 'pointer', position: 'relative' }}
+                  style={{ cursor: 'pointer' }}
                 >
-                  <div style={{ position: 'absolute', top: 20, right: 20 }}>
-                    <div className="supplementary-service-checkbox">
-                      {isSelected && (
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                          <path d="M3 7.5L5.5 10L11 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <div className="supplementary-service-content">
-                    <span className="supplementary-service-name" style={{ paddingRight: 32 }}>{service.title}</span>
+                  <div className="supplementary-service-content" style={{ flex: 1 }}>
+                    <span className="supplementary-service-name">{service.title}</span>
                     <div className="supplementary-service-meta">
                       <span>{service.duration}</span>
                       <span className="supplementary-service-price">
@@ -140,7 +131,12 @@ function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
                         <span className="price-original">{service.priceOriginal} €</span>
                       </span>
                     </div>
-                    {isSelected && (
+                  </div>
+                  
+                  <div style={{ marginLeft: 16, display: 'flex', alignItems: 'center' }}>
+                    {!isSelected ? (
+                      <div className="supplementary-service-checkbox"></div>
+                    ) : (
                       <div 
                         className="quantity-selector"
                         onClick={(e) => e.stopPropagation()}
