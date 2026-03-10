@@ -51,60 +51,6 @@ function Step02({ prestationType, onPrestationChange, onNext, onBack }: Step02Pr
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div className="stepper-horizontal stepper-compact">
-          <div className="stepper-step">
-            <div className="stepper-dot active">1</div>
-            <span className="stepper-title active">Prestation & Plan</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">2</div>
-            <span className="stepper-title pending">Prestations supplémentaires</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">3</div>
-            <span className="stepper-title pending">Date et Heure</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">4</div>
-            <span className="stepper-title pending">Infos personnelles</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">5</div>
-            <span className="stepper-title pending">Identité</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">6</div>
-            <span className="stepper-title pending">Activer</span>
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid var(--color-border)', width: '100%' }} />
-
         <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
           {/* Section 1: Type de prestation */}
           <PrestationTypeSelector

@@ -26,12 +26,13 @@ function Step01({ onNext, onBack }: Step01Props) {
   }
 
   return (
-    <div className="form-step-card">
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 32, width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <h2 className="form-step-title" style={{ marginBottom: 0 }}>Merci de renseigner vos coordonnées de contact</h2>
-          <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 4/6</span>
-        </div>
+    <div className="form-step-card form-step-v2">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+            <h2 className="form-step-title" style={{ marginBottom: 8 }}>Merci de renseigner vos coordonnées de contact</h2>
+            <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 4/6</span>
+          </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
           {/* Row 1: Nom + Prénom */}
           <div className="input-row">
@@ -174,6 +175,7 @@ function Step01({ onNext, onBack }: Step01Props) {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
 

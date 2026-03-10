@@ -20,66 +20,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div className="stepper-horizontal stepper-compact">
-          <div className="stepper-step">
-            <div className="stepper-dot completed">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <circle cx="7" cy="7" r="6" fill="#1BB42D" />
-                <path d="M4 7L6 9L10 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </div>
-            <span className="stepper-title">Prestation & Plan</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot completed">2</div>
-            <span className="stepper-title">Prestations supplémentaires</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot active">3</div>
-            <span className="stepper-title active">Date et Heure</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">4</div>
-            <span className="stepper-title pending">Infos personnelles</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">5</div>
-            <span className="stepper-title pending">Identité</span>
-          </div>
-          <div className="stepper-chevron">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <div className="stepper-step">
-            <div className="stepper-dot pending">6</div>
-            <span className="stepper-title pending">Activer</span>
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid var(--color-border)', width: '100%' }} />
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 24, paddingTop: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: 16 }}>
             <h2 className="form-step-title" style={{ marginBottom: 0 }}>Date et Heure</h2>
             <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 3/6</span>
