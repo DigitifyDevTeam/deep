@@ -51,7 +51,7 @@ function Step02({ prestationType, onPrestationChange, onNext, onBack }: Step02Pr
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 15, paddingTop: 32 }}>
           {/* Section 1: Type de prestation */}
           <PrestationTypeSelector
             prestationType={prestationType}
@@ -63,10 +63,7 @@ function Step02({ prestationType, onPrestationChange, onNext, onBack }: Step02Pr
           {prestationType && (
             <div key={prestationType} className="prestation-plan-section" style={{ animation: 'fadeSlideIn 0.35s ease-out 0.2s both' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <h3 className="form-step-subtitle" style={{ marginBottom: 0 }}>Choisissez votre plan</h3>
-                <p style={{ fontSize: 14, color: 'var(--color-text-muted)', lineHeight: 1.5, marginTop: -8 }}>
-                  Sélectionnez le plan qui correspond à votre prestation.
-                </p>
+               
                 <div className="plan-cards-grid">
                   {plans.map((plan) => (
                     <button

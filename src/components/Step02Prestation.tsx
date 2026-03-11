@@ -26,6 +26,7 @@ interface Step02PrestationProps {
 
 function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
   const [quantities, setQuantities] = useState<Record<string, number>>({})
+  const [wantsSupplementary, setWantsSupplementary] = useState(false)
 
   const getQuantity = (id: string) => quantities[id] ?? 0
 
@@ -37,15 +38,33 @@ function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 15, paddingTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', flexWrap: 'wrap', gap: 16 }}>
-            <div>
-              <h2 className="form-step-title" style={{ marginBottom: 8 }}>Des prestations supplémentaires ?</h2>
-              <span className="supplementary-discount-tag">-20 % sur toutes les prestations supplémentaires</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1, minWidth: 0 }}>
+              <div className="supplementary-toggle-row">
+                <h2 className="form-step-title" style={{ margin: 0 }}>Voulez-vous des prestations supplémentaires ?</h2>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={wantsSupplementary}
+                  aria-label={wantsSupplementary ? 'Désactiver les prestations supplémentaires' : 'Activer les prestations supplémentaires'}
+                  className={`supplementary-toggle ${wantsSupplementary ? 'on' : ''}`}
+                  onClick={() => setWantsSupplementary((v) => !v)}
+                >
+                  <span className="supplementary-toggle-track">
+                    <span className="supplementary-toggle-thumb" />
+                  </span>
+                </button>
+              </div>
+              <div className="supplementary-discount-badge">
+                <span className="supplementary-discount-badge-icon" aria-hidden>−30&nbsp;%</span>
+                <span className="supplementary-discount-badge-text">Offre exclusive : économisez sur toutes les prestations supplémentaires</span>
+              </div>
             </div>
             <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 2/6</span>
           </div>
 
+          {wantsSupplementary && (
           <div className="supplementary-services-grid">
             {SUPPLEMENTARY_SERVICES.map((service) => {
               const qty = getQuantity(service.id)
@@ -112,6 +131,7 @@ function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
               )
             })}
           </div>
+          )}
         </div>
       </div>
 

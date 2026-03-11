@@ -20,7 +20,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 15, paddingTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: 16 }}>
             <h2 className="form-step-title" style={{ marginBottom: 0 }}>Date et Heure</h2>
             <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 3/6</span>
@@ -86,7 +86,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
                           width: '100%',
                         }}
                       >
-                        Réservé
+                        Complet
                       </button>
                     )
                   }
@@ -133,7 +133,8 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
       </div>
 
       <div className="plan-step-footer" style={{ marginTop: 24 }}>
-        <div className="plan-step-actions" style={{ display: 'flex', gap: 24, marginLeft: 'auto' }}>
+        <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 3 sur 6</span>
+        <div style={{ display: 'flex', gap: 24 }}>
           <button className="btn btn-secondary" onClick={onBack}>Retour</button>
           <button 
             className="btn btn-primary" 
@@ -141,7 +142,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
             disabled={!selectedDate || !time}
             style={{ backgroundColor: 'var(--color-primary)', backgroundImage: 'none', borderColor: 'var(--color-primary)' }}
           >
-            Suivant
+            Continuer
           </button>
         </div>
       </div>

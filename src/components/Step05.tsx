@@ -7,7 +7,7 @@ function Step05({ onNext, onBack }: Step05Props) {
   return (
     <div className="form-step-card form-step-v2">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 24, width: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 40, paddingTop: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 15, paddingTop: 32 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexWrap: 'wrap', gap: 16 }}>
             <div>
               <h2 className="form-step-title" style={{ marginBottom: 8 }}>Activez votre compte</h2>
