@@ -5,7 +5,9 @@ const TIME_SLOTS = [
   "9h00", "10h30", "12h00", "13h30", 
   "15h00", "16h30", "18h00", "19h30", 
   "21h00"
+ 
 ]
+
 
 interface Step03DateHeureProps {
   readonly onNext: () => void

@@ -664,8 +664,35 @@
 .supplementary-toggle-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.supplementary-toggle-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.supplementary-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.supplementary-toggle-labels {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.9em;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.supplementary-toggle-labels span.active {
+  color: var(--color-primary);
+  font-weight: 600;
 }
 
 .supplementary-toggle {

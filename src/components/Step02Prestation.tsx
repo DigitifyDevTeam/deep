@@ -42,19 +42,28 @@ function Step02Prestation({ onNext, onBack }: Step02PrestationProps) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', flexWrap: 'wrap', gap: 16 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flex: 1, minWidth: 0 }}>
               <div className="supplementary-toggle-row">
-                <h2 className="form-step-title" style={{ margin: 0 }}>Voulez-vous des prestations supplémentaires ?</h2>
-                <button
-                  type="button"
-                  role="switch"
-                  aria-checked={wantsSupplementary}
-                  aria-label={wantsSupplementary ? 'Désactiver les prestations supplémentaires' : 'Activer les prestations supplémentaires'}
-                  className={`supplementary-toggle ${wantsSupplementary ? 'on' : ''}`}
-                  onClick={() => setWantsSupplementary((v) => !v)}
-                >
-                  <span className="supplementary-toggle-track">
-                    <span className="supplementary-toggle-thumb" />
+                <h2 className="form-step-title supplementary-toggle-title" style={{ margin: 0 }}>
+                  Voulez-vous des prestations supplémentaires ?
+                  <span className="supplementary-toggle-group">
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={wantsSupplementary}
+                      aria-label={wantsSupplementary ? 'Désactiver les prestations supplémentaires' : 'Activer les prestations supplémentaires'}
+                      className={`supplementary-toggle ${wantsSupplementary ? 'on' : ''}`}
+                      onClick={() => setWantsSupplementary((v) => !v)}
+                    >
+                      <span className="supplementary-toggle-track">
+                        <span className="supplementary-toggle-thumb" />
+                      </span>
+                    </button>
+                    <span className="supplementary-toggle-labels">
+                      <span className={wantsSupplementary ? 'active' : ''}>oui</span>
+                      <span>/</span>
+                      <span className={!wantsSupplementary ? 'active' : ''}>non</span>
+                    </span>
                   </span>
-                </button>
+                </h2>
               </div>
               <div className="supplementary-discount-badge">
                 <span className="supplementary-discount-badge-icon" aria-hidden>−30&nbsp;%</span>
