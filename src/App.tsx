@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import Step01 from './components/Step01'
 import Step02 from './components/Step02'
 import Step02Prestation from './components/Step02Prestation'
 import Step03DateHeure from './components/Step03DateHeure'
 import Step04 from './components/Step04'
+import Step01 from './components/Step01'
 import Step05 from './components/Step05'
 
 const STEPS = [

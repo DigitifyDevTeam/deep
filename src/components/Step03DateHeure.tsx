@@ -29,9 +29,9 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
             Sélectionnez le créneau qui vous convient.
           </p>
 
-          <div style={{ display: 'flex', gap: '24px', width: '100%', marginTop: '16px' }}>
+          <div className="date-heure-row" style={{ display: 'flex', gap: '24px', width: '100%', marginTop: '16px' }}>
             {/* Calendar Section */}
-            <div className="pro-calendar-wrapper" style={{ flex: 2 }}>
+            <div className="pro-calendar-wrapper" style={{ flex: 2, minWidth: 0 }}>
               <ProCalendar
                 selected={selectedDate}
                 onSelect={setSelectedDate}
@@ -40,22 +40,26 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
               />
             </div>
 
-            {/* Time Slots Section */}
+            {/* Time Slots Section - Desktop: vertical list, Mobile: grid */}
             <div 
+              className="time-slots-wrapper"
               style={{ 
                 flex: 1, 
-                border: '1px solid var(--color-border-input)', 
-                borderRadius: '12px', 
-                padding: '24px', 
-                boxShadow: 'var(--shadow-neutral-01)',
+                minWidth: 0,
                 display: 'flex',
                 flexDirection: 'column'
               }}
             >
-              <p style={{ marginBottom: '16px', fontSize: '16px', fontWeight: 600, color: 'var(--color-text-muted)' }}>
+              <p className="time-slots-header" style={{ marginBottom: '16px', fontSize: '16px', fontWeight: 600, color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
                 Sélectionnez un créneau horaire
+
+
               </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px', flex: 1 }}>
+              <div className="time-slots-list" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px', flex: 1 }}>
                 {TIME_SLOTS.map((slot, index) => {
                   const isReserved = index === 2 || index === 5 // Simulate reserved slots
                   const isSelected = time === slot
@@ -66,6 +70,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
                         key={slot}
                         type="button"
                         disabled
+                        className="time-slot-btn time-slot-reserved"
                         style={{
                           padding: '0',
                           height: '100%',
@@ -91,6 +96,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
                       key={slot}
                       type="button"
                       onClick={() => setTime(slot)}
+                      className="time-slot-btn"
                       style={{
                         padding: '0',
                         height: '100%',
@@ -98,9 +104,9 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
                         fontSize: '16px',
                         fontWeight: 500,
                         borderRadius: '8px',
-                        border: isSelected ? '2px solid var(--color-primary)' : '1px solid var(--color-border-input)',
-                        backgroundColor: isSelected ? 'var(--color-primary)' : 'transparent',
-                        color: isSelected ? 'white' : 'var(--color-text-dark)',
+                        border: isSelected ? '2px solid var(--color-primary)' : '1px solid var(--color-primary-border)',
+                        background: isSelected ? 'var(--gradient-primary)' : 'var(--color-bg-f9f8ff)',
+                        color: isSelected ? 'white' : 'var(--color-primary)',
                         cursor: 'pointer',
                         transition: 'all 0.2s',
                         width: '100%',
@@ -112,7 +118,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
                       }}
                       onMouseLeave={(e) => {
                         if (!isSelected) {
-                          e.currentTarget.style.borderColor = 'var(--color-border-input)'
+                          e.currentTarget.style.borderColor = 'var(--color-primary-border)'
                         }
                       }}
                     >
@@ -127,24 +133,7 @@ function Step03DateHeure({ onNext, onBack }: Step03DateHeureProps) {
       </div>
 
       <div className="plan-step-footer" style={{ marginTop: 24 }}>
-        <button 
-          type="button"
-          onClick={() => {
-            setSelectedDate(new Date())
-            setTime(undefined)
-          }}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: '14px',
-            fontWeight: 600,
-            cursor: 'pointer',
-            padding: '8px 16px'
-          }}
-        >
-          Reset
-        </button>
-        <div style={{ display: 'flex', gap: 24 }}>
+        <div className="plan-step-actions" style={{ display: 'flex', gap: 24, marginLeft: 'auto' }}>
           <button className="btn btn-secondary" onClick={onBack}>Retour</button>
           <button 
             className="btn btn-primary" 

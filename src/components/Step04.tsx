@@ -19,7 +19,7 @@ function Step04({ onNext, onBack }: Step04Props) {
             <span style={{ fontSize: 16, color: 'var(--color-text-muted)' }}>Étape 5/6</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '24px', width: '100%', flexWrap: 'wrap' }}>
+          <div className="step04-columns-wrapper" style={{ display: 'flex', gap: '24px', width: '100%', flexWrap: 'wrap' }}>
             
             {/* Left Column: Details */}
             <div style={{ flex: 2, display: 'flex', flexDirection: 'column', gap: '24px', minWidth: '300px' }}>

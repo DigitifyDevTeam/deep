@@ -44,6 +44,8 @@ body {
   align-items: flex-start;
   padding: 0;
   width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Hidden for now – remove this rule to show the stepper again */

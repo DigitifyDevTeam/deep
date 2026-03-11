@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 interface Step01Props {
   onNext: () => void
@@ -6,6 +6,7 @@ interface Step01Props {
 }
 
 function Step01({ onNext, onBack }: Step01Props) {
+  const addressInputRef = useRef<HTMLInputElement>(null)
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -24,6 +25,35 @@ function Step01({ onNext, onBack }: Step01Props) {
       [e.target.name]: e.target.value,
     }))
   }
+
+  useEffect(() => {
+    const initAutocomplete = () => {
+      if (!addressInputRef.current || !window.google?.maps?.places) return
+      const autocomplete = new window.google.maps.places.Autocomplete(addressInputRef.current, {
+        types: ['address'],
+        componentRestrictions: { country: ['fr'] },
+      })
+      autocomplete.addListener('place_changed', () => {
+        const place = autocomplete.getPlace()
+        const addr = place.formatted_address || ''
+        let ville = ''
+        let codePostal = ''
+        for (const c of place.address_components || []) {
+          if (c.types.includes('postal_code')) codePostal = c.long_name
+          if (c.types.includes('locality')) ville = c.long_name
+          else if (c.types.includes('administrative_area_level_2') && !ville) ville = c.long_name
+        }
+        setFormData((prev) => ({ ...prev, adresse: addr, ville, codePostal }))
+      })
+    }
+    const id = setInterval(() => {
+      if (addressInputRef.current && window.google?.maps?.places) {
+        clearInterval(id)
+        initAutocomplete()
+      }
+    }, 100)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div className="form-step-card form-step-v2">
@@ -90,17 +120,19 @@ function Step01({ onNext, onBack }: Step01Props) {
             </div>
           </div>
 
-          {/* Row 3: Adresse (full width) */}
+          {/* Row 3: Adresse (full width) – Google Places Autocomplete */}
           <div className="input-row">
             <div className="input-group" style={{ flex: 1, minWidth: '100%' }}>
               <label className="input-label">Adresse</label>
               <div className="input-field">
                 <input
+                  ref={addressInputRef}
                   type="text"
                   name="adresse"
-                  placeholder="Votre adresse complète"
+                  placeholder="Commencez à taper votre adresse..."
                   value={formData.adresse}
                   onChange={handleChange}
+                  autoComplete="off"
                 />
               </div>
             </div>
